@@ -1,0 +1,43 @@
+.cloth-container {
+  margin: 30px auto;
+  width: 80%;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.title {
+  color: darkgreen;
+  margin-bottom: 20px;
+}
+
+.cloth-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cloth-table th,
+.cloth-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.cloth-table th {
+  background-color: #4caf50; /* green header */
+  color: white;
+}
+
+.cloth-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.cloth-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.price {
+  text-align: right;
+  font-weight: bold;
+  color: darkblue;
+}
