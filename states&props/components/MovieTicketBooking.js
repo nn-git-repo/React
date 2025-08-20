@@ -1,45 +1,35 @@
 import React, { useState } from "react";
 import './Appss.css'
-const SeatSelector = ({ seat, toggleSeat }) => {
-  return (
-    <button 
-      className={seat.selected ? "selected" : ""}
-      onClick={() => toggleSeat(seat.id)}
-    >
-      {seat.id}
-    </button>
-  );
-};
-
-const MovieBookingApp = () => {
+function MovieBookingApp() {
   const [seats, setSeats] = useState(
     Array.from({ length: 10 }, (_, i) => ({ id: i + 1, selected: false }))
   );
-  const [confirmed, setConfirmed] = useState(false);
 
   const toggleSeat = (id) => {
-    setSeats(seats.map(seat =>
-      seat.id === id ? { ...seat, selected: !seat.selected } : seat
-    ));
+    setSeats(
+      seats.map((s) =>
+        s.id === id ? { ...s, selected: !s.selected } : s
+      )
+    );
   };
-
-  const selectedSeats = seats.filter(seat => seat.selected);
-  const total = selectedSeats.length * 200; // 200 per seat
 
   return (
     <div>
-      <h1>Movie Ticket Booking</h1>
+      <h2>Movie Booking App</h2>
       <div className="seats">
-        {seats.map(seat => (
-          <SeatSelector key={seat.id} seat={seat} toggleSeat={toggleSeat} />
+        {seats.map((seat) => (
+          <button
+            key={seat.id}
+            className={seat.selected ? "selected" : ""}
+            onClick={() => toggleSeat(seat.id)}
+          >
+            {seat.id}
+          </button>
         ))}
       </div>
-      <h3>Selected Seats: {selectedSeats.map(s => s.id).join(", ")}</h3>
-      <h3>Total: ₹{total}</h3>
-      <button onClick={() => setConfirmed(true)}>Confirm Booking</button>
-      {confirmed && <h2>Booking Confirmed ✅</h2>}
+      <h3>Selected Seats: {seats.filter((s) => s.selected).map((s) => s.id).join(", ")}</h3>
     </div>
   );
-};
+}
 
 export default MovieBookingApp;

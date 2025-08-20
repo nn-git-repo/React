@@ -1,42 +1,37 @@
 import React, { useState } from "react";
 import './Appss.css'
-const CourseCard = ({ course, enrollCourse }) => {
-  return (
-    <div className="course-card">
-      <h3>{course.title}</h3>
-      <p>By {course.author}</p>
-      <p>Duration: {course.duration}</p>
-      <button 
-        onClick={() => enrollCourse(course)}
-        disabled={course.enrolled}
-      >
-        {course.enrolled ? "Already Enrolled" : "Enroll"}
-      </button>
-    </div>
-  );
-};
+function CourseApp() {
+  const [selected, setSelected] = useState([]);
+  const courses = [
+    { id: 1, title: "React Basics", price: 999 },
+    { id: 2, title: "Java Fullstack", price: 1499 },
+    { id: 3, title: "Spring Boot", price: 1299 },
+  ];
 
-const CourseApp = () => {
-  const [courses, setCourses] = useState([
-    { id: 1, title: "React Basics", author: "John", duration: "5h", enrolled: false },
-    { id: 2, title: "Java OOP", author: "Mary", duration: "6h", enrolled: false },
-    { id: 3, title: "Spring Boot", author: "Alex", duration: "8h", enrolled: false }
-  ]);
-
-  const enrollCourse = (course) => {
-    setCourses(courses.map(c =>
-      c.id === course.id ? { ...c, enrolled: true } : c
-    ));
+  const enroll = (course) => {
+    setSelected([...selected, course]);
   };
 
   return (
     <div>
-      <h1>E-Learning Platform</h1>
-      {courses.map(course => (
-        <CourseCard key={course.id} course={course} enrollCourse={enrollCourse} />
-      ))}
+      <h2>Course App</h2>
+      <div className="card-container">
+        {courses.map((course) => (
+          <div className="card" key={course.id}>
+            <h3>{course.title}</h3>
+            <p>₹{course.price}</p>
+            <button onClick={() => enroll(course)}>Enroll</button>
+          </div>
+        ))}
+      </div>
+      <h3>Enrolled Courses:</h3>
+      <ul>
+        {selected.map((c, i) => (
+          <li key={i}>{c.title}</li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 export default CourseApp;

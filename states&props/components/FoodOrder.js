@@ -1,45 +1,37 @@
 import React, { useState } from "react";
 import './Appss.css'
-const FoodCard = ({ item, addToCart }) => {
-  return (
-    <div className="food-card">
-      <h3>{item.name}</h3>
-      <p>₹{item.price}</p>
-      <button onClick={() => addToCart(item)}>Add to Cart</button>
-    </div>
-  );
-};
-
-const FoodOrderApp = () => {
-  const menu = [
-    { id: 1, name: "Pizza", price: 200 },
-    { id: 2, name: "Burger", price: 100 },
-    { id: 3, name: "Pasta", price: 150 }
-  ];
-
+function FoodOrderApp() {
   const [cart, setCart] = useState([]);
+  const menu = [
+    { id: 1, name: "Pizza", price: 250 },
+    { id: 2, name: "Burger", price: 120 },
+    { id: 3, name: "Pasta", price: 180 },
+  ];
 
   const addToCart = (item) => {
     setCart([...cart, item]);
   };
 
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-
   return (
     <div>
-      <h1>Online Food Ordering</h1>
-      <div>
+      <h2>Food Order App</h2>
+      <div className="card-container">
         {menu.map((item) => (
-          <FoodCard key={item.id} item={item} addToCart={addToCart} />
+          <div className="card" key={item.id}>
+            <h3>{item.name}</h3>
+            <p>₹{item.price}</p>
+            <button onClick={() => addToCart(item)}>Add to Cart</button>
+          </div>
         ))}
       </div>
-      <h2>Cart</h2>
-      {cart.map((item, i) => (
-        <p key={i}>{item.name} - ₹{item.price}</p>
-      ))}
-      <h3>Total: ₹{total}</h3>
+      <h3>Your Cart:</h3>
+      <ul>
+        {cart.map((c, i) => (
+          <li key={i}>{c.name} - ₹{c.price}</li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 export default FoodOrderApp;
