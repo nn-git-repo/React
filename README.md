@@ -1,4 +1,4 @@
-=>CASE STUDY
+=>CASE STUDIES
 Form Handling using useState
 Implemented in FormHandling.js (managing input fields with useState).
 
